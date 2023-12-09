@@ -8,20 +8,31 @@ import com.example.springdatabasicdemo.services.ModelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
+@RequestMapping("/Models")
 public class ModelsController {
 
     private final ModelsService modelsService;
+
 
     @Autowired
     public ModelsController(ModelsService modelsService){
         this.modelsService = modelsService;
     }
+
+
+    @GetMapping("/vive")
+    public String viveModels(){
+        return "Models";
+    }
+
 
 
     @PostMapping("models/add")
@@ -45,6 +56,12 @@ public class ModelsController {
     public ResponseEntity<List<ModelsDTO>> getAllBrands(){
         List<ModelsDTO> modelsList = modelsService.getAllModels();
         return new ResponseEntity<>(modelsList, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public String getAllModels(Model model){
+        model.addAttribute("allModels", modelsService.getAllModels());
+        return "Models";
     }
 
 

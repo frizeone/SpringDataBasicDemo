@@ -50,10 +50,10 @@ public class BrandsServiceImpl implements BrandsService<UUID> {
 
 
 
-    @Override
-    public BrandsDTO getBrandById(int id) {
-        return null;
-    }
+//    @Override
+//    public BrandsDTO getBrandById(int id) {
+//        return null;
+//    }
 
     @Override
     public BrandsDTO getBrandById(UUID id){
@@ -67,10 +67,10 @@ public class BrandsServiceImpl implements BrandsService<UUID> {
         return brandsList.stream().map(brands -> modelMapper.map(brands, BrandsDTO.class)).collect(Collectors.toList());
     }
 
-    @Override
-    public BrandsDTO updateBrand(int id, BrandsDTO brandsDTO) {
-        return null;
-    }
+//    @Override
+//    public BrandsDTO updateBrand(int id, BrandsDTO brandsDTO) {
+//        return null;
+//    }
 
     @Override
     public BrandsDTO updateBrand(UUID id, BrandsDTO brandsDTO){
@@ -82,10 +82,10 @@ public class BrandsServiceImpl implements BrandsService<UUID> {
         return  null;
     }
 
-    @Override
-    public void deleteBrands(int id) {
-
-    }
+//    @Override
+//    public void deleteBrands(int id) {
+//
+//    }
 
     @Override
     public void deleteBrands(UUID id){

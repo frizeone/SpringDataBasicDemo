@@ -12,7 +12,7 @@ public interface UserService <ID>{
 
     UserDTO getUserById(UUID id);
 
-    UserDTO getUserByName(String first_name);
+//    UserDTO getUserByName(String first_name);
 
     List<UserDTO> getAllUsers();
 
@@ -20,11 +20,11 @@ public interface UserService <ID>{
 
     UserDTO updateUsers(UUID id, UserDTO userDTO);
 
-    UserDTO apdateUsersByName(String first_name, String last_Name, UserDTO userDTO);
+//    UserDTO apdateUsersByName(String first_name, String last_Name, UserDTO userDTO);
 
     void deleteUsers(int id);
 
     void deleteUsers(UUID id);
-
-    void deleteUsersBuNameAndSeconName(String first_name, String last_name);
+//
+//    void deleteUsersBuNameAndSeconName(String first_name, String last_name);
 }

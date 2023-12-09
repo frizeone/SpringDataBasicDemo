@@ -59,11 +59,11 @@ public class UserServiceImpl implements UserService<UUID> {
     }
 
 
-    @Override
-    public UserDTO getUserByName(String first_name){
-        Optional<User> users = userRepository.findByFirst_name(first_name);
-        return users.map(object -> modelMapper.map(object, UserDTO.class)).orElse(null);
-    }
+//    @Override
+//    public UserDTO getUserByName(String first_name){
+//        Optional<User> users = userRepository.findByFirst_name(first_name);
+//        return users.map(object -> modelMapper.map(object, UserDTO.class)).orElse(null);
+//    }
 
     @Override
     public List<UserDTO> getAllUsers(){
@@ -88,16 +88,16 @@ public class UserServiceImpl implements UserService<UUID> {
 
     }
 
-    @Override
-    public UserDTO apdateUsersByName(String first_name, String last_Name, UserDTO userDTO){
-        Users currentUsers = userRepository.findByFirst_nameAndLast_name(first_name, last_Name);
-        if (currentUsers != null){
-            modelMapper.map(userDTO, currentUsers);
-            return modelMapper.map(userRepository.save(currentUsers), UserDTO.class);
-        }else{
-            return null;
-        }
-    }
+//    @Override
+//    public UserDTO apdateUsersByName(String first_name, String last_Name, UserDTO userDTO){
+//        Users currentUsers = userRepository.findByFirst_nameAndLast_name(first_name, last_Name);
+//        if (currentUsers != null){
+//            modelMapper.map(userDTO, currentUsers);
+//            return modelMapper.map(userRepository.save(currentUsers), UserDTO.class);
+//        }else{
+//            return null;
+//        }
+//    }
 
     @Override
     public void deleteUsers(int id) {
@@ -108,9 +108,11 @@ public class UserServiceImpl implements UserService<UUID> {
     public void deleteUsers(UUID id){
         userRepository.deleteById(id);
     }
-    @Override
-    public void deleteUsersBuNameAndSeconName(String first_name, String last_name){
-        userRepository.deleteByFirst_nameAndLast_name(first_name, last_name);
-    }
+
+
+//    @Override
+//    public void deleteUsersBuNameAndSeconName(String first_name, String last_name){
+//        userRepository.deleteByFirst_nameAndLast_name(first_name, last_name);
+//    }
 
 }

@@ -10,9 +10,9 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, UUID> {
-   Optional<User> findByFirst_name (String first_name);
-
-   Users findByFirst_nameAndLast_name(String first_name, String firstName);
-
-   Users deleteByFirst_nameAndLast_name (String first_name, String last_name);
+//   Optional<User> findByFirst_name (String first_name);
+//
+//    Users findByFirst_nameAndLast_name(String first_name, String last_name);
+//
+//    void deleteByFirst_nameAndLast_name (String first_name, String last_name);
 }
