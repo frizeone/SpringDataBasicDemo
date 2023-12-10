@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head" />
+<body class="d-flex flex-column h-100">
+
+<nav th:replace="fragments/navbar" />
+
+<h1 class="text-center">Добро пожаловать в раздел Модели</h1>
+<p class="text-center"><smal>Тут представлекны все модели в нашем автосалоне</smal></p>
+<div class="text-center">
+<a class="btn btn-primary" style="background-color: white; border-color: black; color: black" href="/Models/add" role="button">Добавить новую модель</a>
+</div>
+<hr>
+<h2 class="text-center">Топ-3 саммых популярных автомобиля</h2>
+<!--<div class="row">-->
+<!--    <div class="col-4">-->
+<!--    <th:block th:each="model : ${}">-->
+<!--        <div style=" margin-left: auto;-->
+<!--    margin-right: auto;">-->
+<!--            <div class="card mb-3" style="min-width: 1000px; max-width: 1500px;">-->
+
+<!--                <div class="row g-0">-->
+<!--                    <div class="col-md-4">-->
+<!--                        <img th:src="${model?.}" class="img-fluid rounded-start">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-8">-->
+<!--                        <div class="card-body">-->
+<!--                            <h5 class="card-title" th:text="${model?.}"></h5>-->
+<!--                            <p th:text="'Категория авто: ' + ${model?.}"></p>-->
+<!--                            <p th:text="'Дата начала: ' + ${model?.}" ></p>-->
+<!--                            <p th:text="'Дата конца: ' + ${model?.}" ></p>-->
+<!--                            <p th:text="'Дата создания: ' + ${model?.}" ></p>-->
+<!--                            <p th:text="'Бренд: ' + ${model?.}" ></p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--</div>-->
+<!--</div>-->
+<hr>
+<th:block th:each="model : ${allModels}">
+<div style=" margin-left: auto;
+    margin-right: auto;">
+    <div class="card mb-3" style="min-width: 1000px; max-width: 1500px;">
+
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img th:src="${model?.imageUrl}" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${model?.name}"></h5>
+                        <p th:text="'Категория авто: ' + ${model?.category}"></p>
+                        <p th:text="'Дата начала: ' + ${model?.startYear}" ></p>
+                        <p th:text="'Дата конца: ' + ${model?.endYear}" ></p>
+                        <p th:text="'Дата создания: ' + ${model?.created}" ></p>
+                        <p th:text="'Бренд: ' + ${model?.brands?.name}" ></p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+    <br>
+
+</th:block>
+
+
+
+<!-- Закрывающий тег body -->
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

@@ -1,9 +1,7 @@
 package com.example.springdatabasicdemo.controllers;
 
 
-import com.example.springdatabasicdemo.dtos.BrandsDTO;
 import com.example.springdatabasicdemo.dtos.ModelsDTO;
-import com.example.springdatabasicdemo.models.Models;
 import com.example.springdatabasicdemo.services.ModelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,10 +28,13 @@ public class ModelsController {
 
     @GetMapping("/vive")
     public String viveModels(){
-        return "Models";
+        return "Models-all";
     }
 
-
+    @GetMapping("/add")
+    public  String addModels() {
+        return "Models-add";
+    }
 
     @PostMapping("models/add")
     public ResponseEntity<ModelsDTO> addNewModels (@RequestBody ModelsDTO modelsDTO){
@@ -52,7 +53,7 @@ public class ModelsController {
     }
 
 
-    @GetMapping("models/getAll")
+    @GetMapping("/getAll")
     public ResponseEntity<List<ModelsDTO>> getAllBrands(){
         List<ModelsDTO> modelsList = modelsService.getAllModels();
         return new ResponseEntity<>(modelsList, HttpStatus.OK);
@@ -61,7 +62,7 @@ public class ModelsController {
     @GetMapping("/all")
     public String getAllModels(Model model){
         model.addAttribute("allModels", modelsService.getAllModels());
-        return "Models";
+        return "Models-all";
     }
 
 

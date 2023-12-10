@@ -40,7 +40,7 @@ public class UserDTO {
 
     @NotNull(message = "Измененная дата не может быть равна null")
     @PastOrPresent(message = "Дата модификации должна быть в прошлом или настоящем")
-    private Date modifited;
+    private Date modified;
 
 
 
@@ -48,7 +48,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(UUID id, String username, String password, String first_name, String last_name, Boolean is_active, RolesDTO roles, String image_url, Date created, Date modifited) {
+    public UserDTO(UUID id, String username, String password, String first_name, String last_name, Boolean is_active, RolesDTO roles, String image_url, Date created, Date modified) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -58,7 +58,7 @@ public class UserDTO {
         this.roles = roles;
         this.image_url = image_url;
         this.created = created;
-        this.modifited = modifited;
+        this.modified = modified;
     }
 
     public UUID getId() {
@@ -134,15 +134,15 @@ public class UserDTO {
     }
 
     public Date getModifited() {
-        return modifited;
+        return modified;
     }
 
-    public void setModifited(Date modifited) {
-        this.modifited = modifited;
+    public void setModifited(Date modified) {
+        this.modified = modified;
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" + "username='" + username + ", password='" + password +  ", firsName='" + first_name +  ", lastName='" + last_name + ", isActive=" + is_active + ", role=" + roles + ", imageUrl='" + image_url + ", created=" + created + ", modified=" + modifited + '}';
+        return "UserDTO{" + "username='" + username + ", password='" + password +  ", firsName='" + first_name +  ", lastName='" + last_name + ", isActive=" + is_active + ", role=" + roles + ", imageUrl='" + image_url + ", created=" + created + ", modified=" + modified + '}';
     }
 }
