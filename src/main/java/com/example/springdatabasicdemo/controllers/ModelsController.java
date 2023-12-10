@@ -42,6 +42,9 @@ public class ModelsController {
 
     }
 
+
+
+
     @GetMapping("models/getOne/{id}")
     public ResponseEntity<ModelsDTO> takeOneById (@PathVariable UUID id){
         ModelsDTO modelsDTO = modelsService.geModelById(id);
