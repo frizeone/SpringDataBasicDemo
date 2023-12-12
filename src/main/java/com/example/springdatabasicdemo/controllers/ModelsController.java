@@ -3,12 +3,15 @@ package com.example.springdatabasicdemo.controllers;
 
 import com.example.springdatabasicdemo.dtos.ModelsDTO;
 import com.example.springdatabasicdemo.services.ModelsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -68,8 +71,22 @@ public class ModelsController {
         return "Models-all";
     }
 
+    @ModelAttribute("modelsModel")
+    public ModelsDTO initModels(){
+        return new ModelsDTO();
+    }
 
+    @PostMapping("/add")
+    public String addModel(@Valid ModelsDTO modelsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("modelsDTO", modelsDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.modelDTO", bindingResult);
+            return "redirect:/Models/add";
+        }
+        modelsService.addNewModels(modelsDTO);
+        return "redirect:/Models/all";
+    }
 
 
 

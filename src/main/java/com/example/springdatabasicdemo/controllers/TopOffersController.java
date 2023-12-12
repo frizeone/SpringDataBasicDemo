@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.controllers;
+/*package com.example.springdatabasicdemo.controllers;
 
 import com.example.springdatabasicdemo.repositories.OffersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,3 +34,4 @@ public class TopOffersController {
     }
 
 }
+*/

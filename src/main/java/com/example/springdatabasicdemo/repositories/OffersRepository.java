@@ -16,10 +16,10 @@ public interface OffersRepository extends JpaRepository<Offers, UUID> {
 
     List<Offers> findByUsers(Users users);
 
-    @Query("SELECT o.model.id, COUNT(o) as offerCount " +
+  /*  @Query("SELECT o.model.id, COUNT(o) as offerCount " +
             "FROM OffersDTO o " +
             "GROUP BY o.model.id " +
             "ORDER BY offerCount DESC")
     List<Object[]> findTopModelsByOfferCount(Pageable pageable);
-
+*/
 }
