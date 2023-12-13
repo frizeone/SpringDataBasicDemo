@@ -21,10 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,10 +104,19 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
         return models.map(object -> modelMapper.map(object, ModelsDTO.class)).orElse(null);
     }
 
+
+
+
     @Override
     public List<ModelsDTO> getAllModels(){
         List<Models> modelsList = modelsRepository.findAll();
         return modelsList.stream().map(models -> modelMapper.map(models, ModelsDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ModelsDTO getModelByThreeParam(String name, int startYear, int endYear){
+        Optional<Models> model = Optional.ofNullable(modelsRepository.findModelsByNameAndStartYearAndEndYear(name, startYear, endYear));
+        return model.map(object -> modelMapper.map(object, ModelsDTO.class)).orElse(null);
     }
 
     @Override

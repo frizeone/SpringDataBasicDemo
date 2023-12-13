@@ -5,6 +5,7 @@ import com.example.springdatabasicdemo.dtos.ModelsDTO;
 import com.example.springdatabasicdemo.enumPacage.Category;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ public interface ModelsService<ID>{
     ModelsDTO geModelById(UUID id);
 
     List<ModelsDTO> getAllModels();
+
+    ModelsDTO getModelByThreeParam(String name, int startYear, int endYear);
 
     ModelsDTO updateModels(int id, ModelsDTO modelsDTO);
 

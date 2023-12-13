@@ -6,6 +6,7 @@ import com.example.springdatabasicdemo.services.BrandsService;
 import com.example.springdatabasicdemo.services.ModelsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +48,12 @@ public class ModelsController {
         return "Models-add";
     }
 
+
+    @GetMapping("/vive/Models-details/{name}/{startYear}/{endYear}")
+    public String getDetailsModels(@PathVariable("name") String name, @PathVariable("startYear") int startYear, @PathVariable("endYear") int endYear, Model model){
+        model.addAttribute("modelAtribute", modelsService.getModelByThreeParam(name,startYear,endYear));
+        return "Models-details";
+    }
 
 
 
@@ -129,10 +137,10 @@ public class ModelsController {
 //        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //    }
 
-    @DeleteMapping("models/delete/{name}")
-    public ResponseEntity<Void> deleteBrands (@PathVariable String name){
+    @DeleteMapping("/models-delete/{name}")
+    public String deleteBrands (@PathVariable("") String name){
         modelsService.deleteModelsByname(name);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return "redirect: /Models/all";
     }
 
 

@@ -39,6 +39,7 @@
 </div>
 </div>
 <hr>
+
 <th:block th:each="model : ${allModels}">
 <div style=" margin-left: auto;
     margin-right: auto;">
@@ -46,16 +47,19 @@
 
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img th:src="${model?.imageUrl}" class="img-fluid rounded-start">
+                    <img th:src="${model.imageUrl}" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${model?.name}"></h5>
-                        <p th:text="'Категория авто: ' + ${model?.category}"></p>
-                        <p th:text="'Дата начала: ' + ${model?.startYear}" ></p>
-                        <p th:text="'Дата конца: ' + ${model?.endYear}" ></p>
-                        <p th:text="'Дата создания: ' + ${model?.created}" ></p>
-                        <p th:text="'Бренд: ' + ${model?.brands?.name}" ></p>
+                        <h5 class="card-title" th:text="${model.name}"></h5>
+                        <p th:text="'Категория авто: ' + ${model.category}"></p>
+                        <p th:text="'Дата начала: ' + ${model.startYear}" ></p>
+                        <p th:text="'Дата конца: ' + ${model.endYear}" ></p>
+                        <p th:text="'Дата создания: ' + ${model.created}" ></p>
+                        <p th:text="'Бренд: ' + ${model.brands.name}" ></p>
+                        <h4><a class="btn-block"
+                               th:href="@{/Models/vive/Models-details/{name}/{startYear}/{endYear}(name=${model.name}, startYear=${model.startYear}, endYear=${model.endYear})}" >Detail info</a>
+                        </h4>
                     </div>
                 </div>
             </div>

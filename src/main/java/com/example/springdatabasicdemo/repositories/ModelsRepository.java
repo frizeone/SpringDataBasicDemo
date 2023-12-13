@@ -4,15 +4,18 @@ import com.example.springdatabasicdemo.enumPacage.Category;
 import com.example.springdatabasicdemo.models.Brands;
 import com.example.springdatabasicdemo.models.Models;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface ModelsRepository extends JpaRepository<Models, UUID> {
 
-
+       @Query("select m from Models m where m.name = :name and m.startYear = :startYear and m.endYear = :endYear")
+       Models findModelsByNameAndStartYearAndEndYear (String name, int startYear, int endYear);
 
        Models findByName (String name);
 
