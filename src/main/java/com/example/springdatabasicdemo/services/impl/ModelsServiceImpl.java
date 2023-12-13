@@ -13,9 +13,14 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.module.ModuleFinder;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,9 +36,50 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Value("${upload.dir}")
+    private String uploadDir;
+
+    public ModelsDTO addNewModels(ModelsDTO modelsDTO, MultipartFile file) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<ModelsDTO>> violations = validator.validate(modelsDTO);
+
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<ModelsDTO> violation : violations) {
+                System.out.println("Ошибка валидации: " + violation.getPropertyPath() + " " + violation.getMessage());
+            }
+            return null;
+        } else {
+            try {
+                // Сохранение файла в директорию
+                String fileName = saveFile(file);
+
+                // Обновление модели с учетом ссылки на файл
+                modelsDTO.setImageUrl("/img/" + fileName);
+
+                Models models = modelMapper.map(modelsDTO, Models.class);
+                return modelMapper.map(modelsRepository.save(models), ModelsDTO.class);
+            } catch (IOException e) {
+                // Обработка ошибки сохранения файла
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    // ...
+
+    private String saveFile(MultipartFile file) throws IOException {
+        String fileName = file.getOriginalFilename();
+        Path filePath = Path.of(uploadDir, fileName);
+
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return fileName;
+    }
 
     @Override
-    public ModelsDTO addNewModels(ModelsDTO modelsDTO){
+    public ModelsDTO addModels(ModelsDTO modelsDTO){
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<ModelsDTO>> violations = validator.validate(modelsDTO);
@@ -48,6 +94,7 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
             return modelMapper.map(modelsRepository.save(models), ModelsDTO.class);
         }
     }
+
 
     @Override
     public ModelsDTO geModelById(int id) {

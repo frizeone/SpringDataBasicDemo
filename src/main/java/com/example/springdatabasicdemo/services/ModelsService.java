@@ -3,12 +3,15 @@ package com.example.springdatabasicdemo.services;
 import com.example.springdatabasicdemo.dtos.BrandsDTO;
 import com.example.springdatabasicdemo.dtos.ModelsDTO;
 import com.example.springdatabasicdemo.enumPacage.Category;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ModelsService<ID>{
-    ModelsDTO addNewModels(ModelsDTO modelsDTO);
+    ModelsDTO addNewModels(ModelsDTO modelsDTO, MultipartFile file);
+
+    ModelsDTO addModels(ModelsDTO modelsDTO);
 
     ModelsDTO geModelById(int id);
 

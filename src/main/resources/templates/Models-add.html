@@ -13,13 +13,14 @@
 <hr>
 
 <main class="flex-shrink-0">
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Add Company</h1>
+                    <h1>Add Models</h1>
                 </div>
+                <hr>
                 <form th:action="@{/Models/add}"
                       th:method="post"
                       th:object="${modelsModel}"
@@ -33,42 +34,109 @@
                         <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">Error
                             message</small>
                     </div>
-
+                    <hr>
+                    <fieldset class="mb-3">
+                        <legend>Choose Category</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input th:field="*{category}"
+                                       th:value="Car"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input" name="category"/>
+                                <span>Car</span>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input th:field="*{category}"
+                                       th:value="Buss"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input" name="category"/>
+                                <span>Buss</span>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input th:field="*{category}"
+                                       th:value="Truck"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input " name="category"/>
+                                <span>Truck</span>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input th:field="*{category}"
+                                       th:value="Motorcycle"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input " name="category"/>
+                                <span>Motorcycle</span>
+                            </label>
+                        </div>
+                        <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                               class="text-danger">Error message</small>
+                    </fieldset>
+                    <hr>
                     <div class="mb-3">
-                        <label class="form-label" for="category">Category</label>
-                        <option
+                        <label class="form-label" for="imageUrl">Image File:</label>
+                        <input type="file" id="imageUrl" name="imageUrl" accept="image/*" required>
 
-
-
-                        ></option>
-                        <input th:field="*{category}"
-                               th:errorclass="is-invalid"
-                               type="text" class="form-control text-center" id="category" aria-describedby="category"
-                               name="category"/>
-                        <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger">Error
-                            message</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="description">Description</label>
-                        <input th:field="*{description}"
-                               th:errorclass="is-invalid"
-                               type="text" class="form-control text-center"
-                               id="description" aria-describedby="description" name="description"/>
-                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
                                class="text-danger">Error
                             message</small>
                     </div>
-
+                    <hr>
                     <div class="mb-3">
-                        <label class="form-label" for="budget">Budget</label>
-                        <input th:field="*{budget}"
-                               th:errorclass="is-invalid"
-                               type="number" min="0" class="form-control text-center"
-                               id="budget" aria-describedby="budget" name="budget"/>
-                        <small th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}"
-                               class="text-danger">Budget</small>
+                        <label class="form-label" for="startYear">Start Year</label>
+                        <input th:field="*{startYear}"
+                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               id="startYear" aria-describedby="startYear" name="startYear"/>
+                        <small th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}" class="text-danger">Error
+                            message</small>
                     </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label class="form-label" for="endYear">End Year</label>
+                        <input th:field="*{endYear}"
+                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               id="endYear" aria-describedby="endYear" name="endYear"/>
+                        <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label class="form-label" for="created">Created Date</label>
+                        <input th:field="*{created}"
+                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               id="created" aria-describedby="created" name="created"/>
+                        <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{created}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label class="form-label" for="modified">Modified Date</label>
+                        <input th:field="*{modified}"
+                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               id="modified" aria-describedby="modified" name="modified"/>
+                        <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{modified}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label class="form-label" for="brands"><h5>All available brands</h5></label>
+                        <select multiple="false" class="form-control text-center"
+                                id="brands" name="name" th:field="*{brands}">
+                            <option th:each="c : ${allBrand}"
+                                    th:value="${c?.name}"
+                                    th:text="${c?.name}">Brand
+                            </option>
+                        </select>
+
+                        <small th:if="${#fields.hasErrors('brands')}" th:errors="*{brands}"
+                               class="text-danger">Error
+                            message</small>
+                    </div>
+                    <hr>
                     <button type="submit" class="btn btn-secondary">Add Company</button>
                 </form>
             </div>
@@ -76,7 +144,7 @@
     </div>
 </main>
 
- Закрывающий тег body
+
 <footer th:replace="fragments/footer"/>
 </body>
 </html>

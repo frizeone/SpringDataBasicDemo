@@ -2,6 +2,7 @@ package com.example.springdatabasicdemo.controllers;
 
 
 import com.example.springdatabasicdemo.dtos.ModelsDTO;
+import com.example.springdatabasicdemo.services.BrandsService;
 import com.example.springdatabasicdemo.services.ModelsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -22,10 +24,12 @@ public class ModelsController {
 
     private final ModelsService modelsService;
 
+    private final BrandsService brandsService;
 
     @Autowired
-    public ModelsController(ModelsService modelsService){
+    public ModelsController(ModelsService modelsService, BrandsService brandsService){
         this.modelsService = modelsService;
+        this.brandsService = brandsService;
     }
 
 
@@ -35,14 +39,19 @@ public class ModelsController {
     }
 
     @GetMapping("/add")
-    public  String addModels() {
+    public  String addModels(Model model) {
+
+        model.addAttribute("allBrand", brandsService.getAllBrands());
+
         return "Models-add";
     }
 
-    @PostMapping("models/add")
-    public ResponseEntity<ModelsDTO> addNewModels (@RequestBody ModelsDTO modelsDTO){
-        return new ResponseEntity<>(modelsService.addNewModels(modelsDTO), HttpStatus.OK);
 
+
+
+    @PostMapping("models/add")
+    public ResponseEntity<ModelsDTO> addNewModels (@RequestBody ModelsDTO modelsDTO, @RequestParam("imageFile") MultipartFile imageFile){
+        return new ResponseEntity<>(modelsService.addNewModels(modelsDTO, imageFile), HttpStatus.OK);
     }
 
 
@@ -77,14 +86,14 @@ public class ModelsController {
     }
 
     @PostMapping("/add")
-    public String addModel(@Valid ModelsDTO modelsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String addModel(@Valid ModelsDTO modelsDTO, @RequestParam("imageFile")MultipartFile imageFile, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("modelsDTO", modelsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.modelDTO", bindingResult);
             return "redirect:/Models/add";
         }
-        modelsService.addNewModels(modelsDTO);
+        modelsService.addNewModels(modelsDTO, imageFile);
         return "redirect:/Models/all";
     }
 
