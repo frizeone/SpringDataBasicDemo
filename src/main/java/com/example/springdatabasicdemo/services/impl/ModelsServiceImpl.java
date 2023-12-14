@@ -114,6 +114,12 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
     }
 
     @Override
+    public List<ModelsDTO> getTopThreeModels(){
+        List<Models> topThreeModelsList = modelsRepository.findTopThree();
+        return topThreeModelsList.stream().map(models -> modelMapper.map(models, ModelsDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public ModelsDTO getModelByThreeParam(String name, int startYear, int endYear){
         Optional<Models> model = Optional.ofNullable(modelsRepository.findModelsByNameAndStartYearAndEndYear(name, startYear, endYear));
         return model.map(object -> modelMapper.map(object, ModelsDTO.class)).orElse(null);
@@ -157,6 +163,10 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
         modelsRepository.deleteById(id);
     }
 
+    @Override
+    public void deleteThreeParam(String name, int startYear, int endYear){
+        modelsRepository.deleteModelsByNameAndStartYearAndEndYear(name, startYear, endYear);
+    }
 
     @Override
     public void  deleteModelsByname(String name) {

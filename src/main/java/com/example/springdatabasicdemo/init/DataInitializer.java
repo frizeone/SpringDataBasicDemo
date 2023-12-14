@@ -122,8 +122,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelsDTO sclass = new ModelsDTO(null,"S-CLASS CABRIO", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
         ModelsDTO eclass = new ModelsDTO(null,"E-CLASS", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
         ModelsDTO ieight = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
-        ModelsDTO ieight1 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
-        ModelsDTO ieight2 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
+        ModelsDTO ieight1 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2024, 2026, sqlDate,sqlDate, bmw);
+        ModelsDTO ieight2 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2025, 2027, sqlDate,sqlDate, bmw);
         ModelsDTO mfive = new ModelsDTO(null,"M-5 COMPETITION", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
         ModelsDTO rssix = new ModelsDTO(null,"R-6 AVANT", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, audi);
 //        model1.setCategory(Category.Car);
@@ -156,15 +156,34 @@ public class DataInitializer implements CommandLineRunner {
         // Создание и сохранение объектов Offers
 
         OffersDTO offers1 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-        OffersDTO offers2 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,sclass,user2);
+        OffersDTO offers2 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user2);
+        OffersDTO offers3 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
+        OffersDTO offers4 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user2);
+        OffersDTO offers5 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
+        OffersDTO offers6 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user2);
+        OffersDTO offers7 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user1);
+        OffersDTO offers8 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user2);
+        OffersDTO offers9 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
+        OffersDTO offers10 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,sclass,user2);
+        OffersDTO offers11 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
+        OffersDTO offers12 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,rssix,user2);
 
-        offers1.setEngine(Engine.ELECTRIC);
-        offers1.setTransmission(Transmission.AUTOMATIC);
-        offers2.setEngine(Engine.ELECTRIC);
-        offers2.setTransmission(Transmission.AUTOMATIC);
+
 
         offers1 = offersService.newOffers(offers1);
         offers2 = offersService.newOffers(offers2);
+        offers3 = offersService.newOffers(offers3);
+        offers4 = offersService.newOffers(offers4);
+        offers5 = offersService.newOffers(offers5);
+        offers6 = offersService.newOffers(offers6);
+        offers7 = offersService.newOffers(offers7);
+        offers8 = offersService.newOffers(offers8);
+        offers9 = offersService.newOffers(offers9);
+        offers10 = offersService.newOffers(offers10);
+        offers11 = offersService.newOffers(offers11);
+        offers12 = offersService.newOffers(offers12);
+
+
 
 
 

@@ -44,9 +44,9 @@ public class ModelsController {
     public  String addModels(Model model) {
 
         model.addAttribute("allBrand", brandsService.getAllBrands());
-
         return "Models-add";
     }
+
 
 
     @GetMapping("/vive/Models-details/{name}/{startYear}/{endYear}")
@@ -55,6 +55,11 @@ public class ModelsController {
         return "Models-details";
     }
 
+    @GetMapping("/vive/Models-delete/{name}/{startYear}/{endYear}")
+    public String deleteModels (@PathVariable("name") String name, @PathVariable("startYear") int startYear, @PathVariable("endYear") int endYear, Model model){
+        modelsService.deleteThreeParam(name, startYear, endYear);
+        return "redirect:/Models/all";
+    }
 
 
     @PostMapping("models/add")
@@ -85,6 +90,7 @@ public class ModelsController {
     @GetMapping("/all")
     public String getAllModels(Model model){
         model.addAttribute("allModels", modelsService.getAllModels());
+        model.addAttribute("topThreeModel", modelsService.getTopThreeModels());
         return "Models-all";
     }
 
@@ -140,7 +146,7 @@ public class ModelsController {
     @DeleteMapping("/models-delete/{name}")
     public String deleteBrands (@PathVariable("") String name){
         modelsService.deleteModelsByname(name);
-        return "redirect: /Models/all";
+        return "redirect: /Models/vive";
     }
 
 

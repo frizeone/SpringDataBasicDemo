@@ -86,20 +86,39 @@
                             message</small>
                     </div>
                     <hr>
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label" for="startYear">Start Year</label>-->
+<!--                        <input th:field="*{startYear}"-->
+<!--                               th:errorclass="is-invalid" type="date" class="form-control text-center"-->
+<!--                               id="startYear" aria-describedby="startYear" name="startYear"/>-->
+<!--                        <small th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}" class="text-danger">Error-->
+<!--                            message</small>-->
+<!--                    </div>-->
+<!--                    <hr>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label" for="endYear">End Year</label>-->
+<!--                        <input th:field="*{endYear}"-->
+<!--                               th:errorclass="is-invalid" type="date" class="form-control text-center"-->
+<!--                               id="endYear" aria-describedby="endYear" name="endYear"/>-->
+<!--                        <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}" class="text-danger">Error-->
+<!--                            message</small>-->
+<!--                    </div>-->
                     <div class="mb-3">
                         <label class="form-label" for="startYear">Start Year</label>
                         <input th:field="*{startYear}"
-                               th:errorclass="is-invalid" type="date" class="form-control text-center"
-                               id="startYear" aria-describedby="startYear" name="startYear"/>
+                               th:errorclass="is-invalid"
+                               type="text" class="form-control text-center" id="startYear" aria-describedby="nameHelp"
+                               name="startYear"/>
                         <small th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}" class="text-danger">Error
                             message</small>
                     </div>
                     <hr>
                     <div class="mb-3">
-                        <label class="form-label" for="endYear">End Year</label>
+                        <label class="form-label" for="endYear">endYear</label>
                         <input th:field="*{endYear}"
-                               th:errorclass="is-invalid" type="date" class="form-control text-center"
-                               id="endYear" aria-describedby="endYear" name="endYear"/>
+                               th:errorclass="is-invalid"
+                               type="text" class="form-control text-center" id="endYear" aria-describedby="nameHelp"
+                               name="endYear"/>
                         <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}" class="text-danger">Error
                             message</small>
                     </div>
@@ -126,9 +145,9 @@
                         <label class="form-label" for="brands"><h5>All available brands</h5></label>
                         <select multiple="false" class="form-control text-center"
                                 id="brands" name="name" th:field="*{brands}">
-                            <option th:each="c : ${allBrand}"
-                                    th:value="${c?.name}"
-                                    th:text="${c?.name}">Brand
+                            <option th:each="brand : ${allBrand}"
+                                    th:value="${brand}"
+                                    th:text="${brand?.name}">Brand
                             </option>
                         </select>
 
