@@ -52,6 +52,10 @@ public class RegisterDTO {
         this.modified = modified;
     }
 
+    public RegisterDTO() {
+
+    }
+
     @Pattern(regexp = "^[A-Za-z0-9!@#$%^&*()_+\\-=<>?]*$", message = "Имя пользователя должно содержать только буквы, цифры и некоторые специальные символы")
     @NotBlank(message = "Имя пользователя не может быть пустым")
     public String getUsername() {
@@ -97,6 +101,10 @@ public class RegisterDTO {
         return roles;
     }
 
+    public void setRoles(RolesDTO roles) {
+        this.roles = roles;
+    }
+
     @NotBlank(message = "URL-адрес изображения не может быть пустым")
     public String getImage_url() {
         return image_url;
@@ -113,6 +121,18 @@ public class RegisterDTO {
     @PastOrPresent(message = "Дата модификации должна быть в прошлом или настоящем")
     public Date getModified() {
         return modified;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.springdatabasicdemo.util.impl;
 
+import com.example.springdatabasicdemo.repositories.BrandsRepository;
 import com.example.springdatabasicdemo.util.ValidatorDtoUtil;
 import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class ValidatorDtoUtilImpl implements ValidatorDtoUtil {
     }
 
     @Autowired
-    public ValidatorDtoUtilImpl(Validator validator) {
+    public ValidatorDtoUtilImpl(Validator validator, BrandsRepository brandRepository) {
         this.validator = validator;
+        this.brandRepository = brandRepository;
     }
 
 //    @Override
@@ -50,7 +52,14 @@ public class ValidatorDtoUtilImpl implements ValidatorDtoUtil {
 //        return this.validator.validate(dto);
 //    }
 
+    private final BrandsRepository brandRepository;
 
+
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return brandRepository.findByName(value).isEmpty();
+    }
 
 
 

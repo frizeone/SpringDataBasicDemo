@@ -36,14 +36,12 @@ public class Users extends CreatedAndModified{
     @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private Roles roles;
 
-    public Users(Boolean is_active, String first_name, String image_url, String last_name, String password, String username, Roles roles) {
+    public Users(Boolean is_active, String first_name, String last_name, String password, String username) {
         this.is_active = is_active;
         this.first_name = first_name;
-        this.image_url = image_url;
         this.last_name = last_name;
         this.password = password;
         this.username = username;
-        this.roles = roles;
     }
 
     public Users() {

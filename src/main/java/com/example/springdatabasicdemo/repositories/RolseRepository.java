@@ -13,4 +13,6 @@ public interface RolseRepository extends JpaRepository<Roles, UUID> {
 
     Optional<Roles> findRolesByRole (Role role);
 
+//    Optional<Roles> findRolesByN
+
 }
