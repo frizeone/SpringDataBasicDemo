@@ -26,22 +26,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="lastname">Full Name</label>
-                        <input th:field="*{lastname}"
+                        <label class="form-label" for="last_name">Full Name</label>
+                        <input th:field="*{last_name}"
                                th:errorclass="is-invalid"
-                               type="text" class="form-control text-center" id="lastname" aria-describedby="lastname"
-                               name="lastname"/>
-                        <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger">Error
+                               type="text" class="form-control text-center" id="last_name" aria-describedby="last_name"
+                               name="last_name"/>
+                        <small th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}" class="text-danger">Error
                             message</small>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="firstname">Full Name</label>
-                        <input th:field="*{firstname}"
+                        <label class="form-label" for="first_name">Full Name</label>
+                        <input th:field="*{first_name}"
                                th:errorclass="is-invalid"
-                               type="text" class="form-control text-center" id="firstname" aria-describedby="firstname"
-                               name="firstname"/>
-                        <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger">Error
+                               type="text" class="form-control text-center" id="first_name" aria-describedby="first_name"
+                               name="first_name"/>
+                        <small th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}" class="text-danger">Error
                             message</small>
                     </div>
 

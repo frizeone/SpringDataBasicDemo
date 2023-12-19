@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 @Table(name = "roles")
 public class Roles extends BaseEntity{
 
-    @Column(name = "name")
-    @Enumerated(EnumType.ORDINAL)
+//    @Column(name = "name")
+//    @Enumerated(EnumType.ORDINAL)
     private Role role;
 
 
@@ -19,7 +19,8 @@ public class Roles extends BaseEntity{
     public Roles() {
     }
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "name", unique = true)
     public Role getRole() {
         return role;
     }
@@ -27,9 +28,9 @@ public class Roles extends BaseEntity{
     public void setRole(Role role) {
         this.role = role;
     }
-
-    @Override
-    public String toString() {
-        return "Student { id=" + id + ", name=" + role + " }";
-    }
+//
+//    @Override
+//    public String toString() {
+//        return "Student { id=" + id + ", name=" + role + " }";
+//    }
 }

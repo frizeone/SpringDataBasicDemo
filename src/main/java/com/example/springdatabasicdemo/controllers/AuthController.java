@@ -5,6 +5,7 @@ package com.example.springdatabasicdemo.controllers;
 
 import com.example.springdatabasicdemo.dtos.RegisterDTO;
 import com.example.springdatabasicdemo.models.Users;
+import com.example.springdatabasicdemo.repositories.UserRepository;
 import com.example.springdatabasicdemo.services.impl.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -40,15 +43,18 @@ public class AuthController {
     private static final Logger LOG = LogManager.getLogger(Controller.class);
 
     private AuthService authService;
+    private PasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.authService = authService;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("userRegistrationDto")
     public RegisterDTO initForm() {
-
         return new RegisterDTO();
     }
 
@@ -59,20 +65,42 @@ public class AuthController {
 
     @PostMapping("/register")
     public String doRegister(@Valid RegisterDTO userRegistrationDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userRegistrationDto", userRegistrationDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto", bindingResult);
 
-            return "redirect:/users/register";
-        }
 
-        try {
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("userRegistrationDto", userRegistrationDto);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto", bindingResult);
+//
+//            return "redirect:/users/register";
+//        }
+
+        Users user = new Users(
+                true,
+                userRegistrationDto.getFirst_name(),
+                userRegistrationDto.getLast_name(),
+                passwordEncoder.encode(userRegistrationDto.getPassword()),
+                userRegistrationDto.getUsername()
+        );
+
+
+
+//        user.setRoles(List.of(userRole));
+
+
+        this.userRepository.save(user);
+
+        System.out.println("--------------getPassword--------------- " + userRegistrationDto.getPassword());
+        System.out.println("--------------getUsername--------------- " + userRegistrationDto.getUsername());
+        System.out.println("--------------getFirst_name--------------- " + userRegistrationDto.getFirst_name());
+        System.out.println("--------------getLast_name--------------- " + userRegistrationDto.getLast_name());
+
+//        try {
             this.authService.register(userRegistrationDto);
             return "redirect:/login";
-        }catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/users/register";
-        }
+//        }catch (RuntimeException e) {
+//            redirectAttributes.addFlashAttribute("error", e.getMessage());
+//            return "redirect:/users/register";
+//        }
 
     }
 
@@ -108,4 +136,3 @@ public class AuthController {
         return "redirect:/"; // Перенаправление на главную страницу или другую страницу после выхода
     }
 }
-

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,10 +32,10 @@ public class Users extends CreatedAndModified{
     @Column(name = "username")
     private String username;
 
-    @ManyToOne()
+    @ManyToMany()
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @Cascade(org.hibernate.annotations.CascadeType.MERGE)
-    private Roles roles;
+    private List<Roles> roles;
 
     public Users(Boolean is_active, String first_name, String last_name, String password, String username) {
         this.is_active = is_active;
@@ -99,14 +100,13 @@ public class Users extends CreatedAndModified{
         this.username = username;
     }
 
-    public Roles getRoles() {
+    public List<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(Roles roles) {
+    public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
-
 
     @Override
     public String toString() {

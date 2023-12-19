@@ -35,7 +35,7 @@ public class AuthService {
             throw new RuntimeException("passwords.match");
         }
 
-        var userRole = rolseRepository.findRolesByRole(Role.User).orElseThrow();
+        var userRole = rolseRepository.findRolesByRole(Role.USER).orElseThrow();
 
         Optional<Users> byUsername = this.userRepository.findByUsername(registerDTO.getUsername());
 
@@ -45,6 +45,10 @@ public class AuthService {
         }
 
 
+        System.out.println("----------------as---getFirst_name------------- " + registerDTO.getFirst_name());
+        System.out.println("----------------as---getLast_name------------- " +  registerDTO.getLast_name());
+        System.out.println("----------------as---getPassword------------- " + registerDTO.getPassword());
+        System.out.println("----------------as---------------- " +   registerDTO.getUsername());
 
         Users user = new Users(
                 true,
@@ -55,7 +59,8 @@ public class AuthService {
         );
 
 
-        user.setRoles(userRole);
+
+        user.setRoles(List.of(userRole));
 
 
         this.userRepository.save(user);
