@@ -32,9 +32,7 @@ public class Users extends CreatedAndModified{
     @Column(name = "username")
     private String username;
 
-    @ManyToMany()
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Roles> roles;
 
     public Users(Boolean is_active, String first_name, String last_name, String password, String username) {
@@ -110,10 +108,14 @@ public class Users extends CreatedAndModified{
 
     @Override
     public String toString() {
-        return "Group { id=" + id + ", is_active=" + is_active  +", first_name=" + first_name + ", image_url=" + image_url + ", last_name" + last_name  + ", password=" + password + ", username=" + username + " }";
+        return "Users{" +
+                "is_active=" + is_active +
+                ", first_name='" + first_name + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", roles=" + roles +
+                '}';
     }
-
-
-
-
 }

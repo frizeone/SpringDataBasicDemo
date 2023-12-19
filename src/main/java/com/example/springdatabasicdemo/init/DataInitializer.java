@@ -91,10 +91,7 @@ public class DataInitializer implements CommandLineRunner {
         RolesDTO roleAdmin = new RolesDTO(null, Role.ADMIN);
         roleUser = rolesService.createdRoles(roleUser);
         roleAdmin = rolesService.createdRoles(roleAdmin);
-        role1.setRole(Role.USER);
-        role2.setRole(Role.ADMIN);
-        role1 = rolesService.createdRoles(role1);
-        role2 = rolesService.createdRoles(role2);
+        ;
 
         UserDTO user1 = new UserDTO(null,"aaa", "123123", "Иван", "Плюх", true, roleUser , "/img/cls.jpg", sqlDate, sqlDate);
 
@@ -161,17 +158,17 @@ public class DataInitializer implements CommandLineRunner {
         // Создание и сохранение объектов Offers
 
         OffersDTO offers1 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-//        OffersDTO offers2 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,?clsclass,user2);
+        OffersDTO offers2 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
         OffersDTO offers3 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-//        OffersDTO offers4 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user2);
+        OffersDTO offers4 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
         OffersDTO offers5 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-//        OffersDTO offers6 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user2);
+        OffersDTO offers6 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user1);
         OffersDTO offers7 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user1);
-//        OffersDTO offers8 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user2);
+        OffersDTO offers8 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,mfive,user1);
         OffersDTO offers9 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-//        OffersDTO offers10 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,sclass,user2);
+        OffersDTO offers10 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,sclass,user1);
         OffersDTO offers11 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,clsclass,user1);
-//        OffersDTO offers12 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,rssix,user2);
+        OffersDTO offers12 = new OffersDTO(null, "Offer 1 descriotion", Engine.ELECTRIC, "/img/cls.jpg", 1000, 1, Transmission.AUTOMATIC, sqlDate,sqlDate,sqlDate,rssix,user1);
 
 
 

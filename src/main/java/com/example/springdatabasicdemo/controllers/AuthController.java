@@ -4,7 +4,9 @@ package com.example.springdatabasicdemo.controllers;
 
 
 import com.example.springdatabasicdemo.dtos.RegisterDTO;
+import com.example.springdatabasicdemo.enumPacage.Role;
 import com.example.springdatabasicdemo.models.Users;
+import com.example.springdatabasicdemo.repositories.RolseRepository;
 import com.example.springdatabasicdemo.repositories.UserRepository;
 import com.example.springdatabasicdemo.services.impl.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,12 +47,14 @@ public class AuthController {
     private AuthService authService;
     private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
+    private RolseRepository rolseRepository;
 
     @Autowired
-    public AuthController(AuthService authService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public AuthController(AuthService authService, PasswordEncoder passwordEncoder, UserRepository userRepository, RolseRepository rolseRepository) {
         this.authService = authService;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.rolseRepository = rolseRepository;
     }
 
     @ModelAttribute("userRegistrationDto")
@@ -80,11 +84,13 @@ public class AuthController {
                 userRegistrationDto.getLast_name(),
                 passwordEncoder.encode(userRegistrationDto.getPassword()),
                 userRegistrationDto.getUsername()
+
+
         );
 
 
-
-//        user.setRoles(List.of(userRole));
+        var userRole = rolseRepository.findRolesByRole(Role.USER).orElseThrow();
+        user.setRoles(List.of(userRole));
 
 
         this.userRepository.save(user);
