@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head" />
+<body class="d-flex flex-column h-100">
+
+<nav th:replace="fragments/navbar" />
+
+<h1 class="text-center">Добро пожаловать в раздел Офферы</h1>
+<div sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+<p class="text-center"><smal>Тут представлекны все офферы в нашем автосалоне</smal></p>
+<div class="text-center">
+    <a class="btn btn-primary"  style="background-color: white; border-color: black; color: black" href="/Models/add" role="button">Добавить новую модель</a>
+</div>
+</div>
+
+<!--<h2 class="text-center">Топ-3 саммых популярных автомобиля</h2>-->
+<!--<div class="row">-->
+<!--    <th:block th:each="topModel : ${topThreeModel}">-->
+<!--        <div class="col-4">-->
+
+
+<!--            <div class="card mb-3 text-center" style="width: 600px; height: 280px ; margin: auto ">-->
+
+<!--                <div class="row g-0">-->
+<!--                    <div class="col-md-6">-->
+<!--                        <img th:src="${topModel?.imageUrl}" style="height: 279px" class="img-fluid rounded-start">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                        <div class="card-body">-->
+<!--                            <h5 class="card-title" th:text="${topModel?.name}"></h5>-->
+<!--                            <p th:text="'Категория авто: ' + ${topModel?.category}"></p>-->
+<!--                            <p th:text="'Дата начала: ' + ${topModel?.startYear}" ></p>-->
+<!--                            <p th:text="'Дата конца: ' + ${topModel?.endYear}" ></p>-->
+<!--                            <p th:text="'Дата создания: ' + ${topModel?.created}" ></p>-->
+<!--                            <p th:text="'Бренд: ' + ${topModel?.brands.name}" ></p>-->
+<!--                            <p><a  style="-->
+<!--                                                        width: 230px;-->
+<!--                                                        height: 45px;-->
+<!--                                                        padding: 3px;-->
+<!--                                                        text-align: center;-->
+<!--                                                        border: 1px solid black;-->
+<!--                                                        border-radius: 10px;-->
+<!--                                                        color: black;-->
+<!--                                                        text-decoration: none;"-->
+<!--                                   th:href="@{/Models/vive/Models-details/{name}/{startYear}/{endYear}(name=${topModel.name}, startYear=${topModel.startYear}, endYear=${topModel.endYear})}" >Подробнее</a>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+<!--        </div>-->
+<!--    </th:block>-->
+<!--</div>-->
+<hr>
+<h2 class="text-center">Все представленные модели в нашем сервисе</h2>
+<br>
+<th:block th:each="offer : ${offers}" >
+    <div style=" margin-left: auto;
+    margin-right: auto;">
+        <div class="card mb-3"  style="width: 600px; height: 280px ; margin: auto ">
+
+            <div class="row g-0" >
+                <div class="col-md-4">
+                    <img th:src="${offer.imageUrl}" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${offer?.model?.name}"></h5>
+                        <p th:text="'Бренд: ' + ${offer?.model?.brands?.name}"></p>
+                        <p th:text="'Цена: ' + ${offer?.price}"></p>
+                        <!--                        <p th:text="'Дата начала: ' + ${model.startYear}" ></p>-->
+                        <!--                        <p th:text="'Дата конца: ' + ${model.endYear}" ></p>-->
+                        <p th:text="'Дата создания: ' + ${offer?.created}" ></p>
+                        <h4><a class="btn-block" style="display: block;
+                                                        width: 200px;
+                                                        height: 60px;
+                                                        padding: 10px;
+                                                        text-align: center;
+                                                        border: 1px solid black;
+                                                        border-radius: 10px;
+                                                        color: black;
+                                                        text-decoration: none;"
+                               th:href="@{/Offers/details/{abc}(abc=${offer.id})}" >Подробнее</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+</th:block>
+
+
+
+<!-- Закрывающий тег body -->
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

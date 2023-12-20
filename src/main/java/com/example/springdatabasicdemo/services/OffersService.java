@@ -9,6 +9,10 @@ import java.util.UUID;
 public interface OffersService <ID>{
     OffersDTO newOffers(OffersDTO offersDTO);
 
+
+
+    void register(OffersDTO offer);
+
     OffersDTO getOfferById(int id);
 
     OffersDTO getOfferById(UUID id);

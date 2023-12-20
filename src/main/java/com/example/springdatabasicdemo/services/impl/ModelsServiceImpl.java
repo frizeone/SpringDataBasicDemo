@@ -14,9 +14,7 @@ import jakarta.validation.ValidatorFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +26,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@EnableCaching
 public class ModelsServiceImpl implements ModelsService<UUID> {
 
     @Autowired
@@ -112,7 +109,6 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
 
 
     @Override
-    @Cacheable("allCashbleModels")
     public List<ModelsDTO> getAllModels(){
         List<Models> modelsList = modelsRepository.findAll();
         return modelsList.stream().map(models -> modelMapper.map(models, ModelsDTO.class)).collect(Collectors.toList());
@@ -169,7 +165,6 @@ public class ModelsServiceImpl implements ModelsService<UUID> {
     }
 
     @Override
-    @CacheEvict(cacheNames = {"allCashbleModels"}, allEntries = true)
     public void deleteThreeParam(String name, int startYear, int endYear){
         modelsRepository.deleteModelsByNameAndStartYearAndEndYear(name, startYear, endYear);
     }

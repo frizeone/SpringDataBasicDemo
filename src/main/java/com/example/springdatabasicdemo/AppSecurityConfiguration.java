@@ -42,6 +42,7 @@ public class AppSecurityConfiguration {
                                         requestMatchers("/", "/users/login", "/users/register", "/users/login-error", "/offers/**")
                                         .permitAll().
                                         requestMatchers("/users/profile").authenticated().
+                                        requestMatchers("/vive/Models-delete").hasRole(Role.ADMIN.name()).
                                         requestMatchers("/employees/add", "/employees/employee-delete/").hasRole(Role.ADMIN.name()).
                                         requestMatchers("/companies/add","/companies/company-delete/","/employees/add", "/employees/employee-delete/").hasRole(Role.ADMIN.name()).
                                         anyRequest().authenticated()
@@ -75,6 +76,7 @@ public class AppSecurityConfiguration {
                 new HttpSessionSecurityContextRepository()
         );
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

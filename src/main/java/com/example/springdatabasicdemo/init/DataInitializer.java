@@ -10,6 +10,7 @@ import com.example.springdatabasicdemo.enumPacage.Category;
 import com.example.springdatabasicdemo.enumPacage.Engine;
 import com.example.springdatabasicdemo.enumPacage.Role;
 import com.example.springdatabasicdemo.enumPacage.Transmission;
+import com.example.springdatabasicdemo.models.Users;
 import com.example.springdatabasicdemo.repositories.*;
 import com.example.springdatabasicdemo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,15 +92,23 @@ public class DataInitializer implements CommandLineRunner {
         RolesDTO roleAdmin = new RolesDTO(null, Role.ADMIN);
         roleUser = rolesService.createdRoles(roleUser);
         roleAdmin = rolesService.createdRoles(roleAdmin);
-        ;
 
-        UserDTO user1 = new UserDTO(null,"aaa", "123123", "Иван", "Плюх", true, roleUser , "/img/cls.jpg", sqlDate, sqlDate);
+        var userRole = rolseRepository.findRolesByRole(Role.ADMIN).orElseThrow();
 
-//        UserDTO user2 = new UserDTO(null, "bbb", "123123", "Вова", "Жух", true, roleAdmin , "/img/cls.jpg", sqlDate, sqlDate);
+        UserDTO user1 = new UserDTO(null,"aaa", "123123", "Иван", "Плюх", true, roleUser , "/static/pic/cls.jpg", sqlDate, sqlDate);
 
+        UserDTO user2 = new UserDTO(null, "bbb", passwordEncoder.encode("111111"), "Вова", "Жух", true,roleAdmin,"/img/cls.jpg", sqlDate, sqlDate);
+
+//        user2.setRoles(roleAdmin);
+        Users users = new Users(true,"TEST","TEST",passwordEncoder.encode("111111"),"TEST");
+        users.setCreated(sqlDate);
+        users.setModified(sqlDate);
+        users.setImage_url("/static/pic/cls.jpg");
+        users.setRoles(List.of(userRole));
+        users = userRepository.save(users);
 
         user1 = userService.newUser(user1);
-//        user2 = userService.newUser(user2);
+        user2 = userService.newUser(user2);
 
         // Создание и сохранение объектов Brands
         BrandsDTO brand1 = new BrandsDTO(null, "Brand 1", sqlDate,sqlDate);
@@ -118,16 +127,16 @@ public class DataInitializer implements CommandLineRunner {
 
 
         // Создание и сохранение объектов Models
-        ModelsDTO model1 = new ModelsDTO(null,"Model 1", Category.Car, "/img/cls.jpg", 2023, 2024, sqlDate,sqlDate, brand1);
-        ModelsDTO model2 = new ModelsDTO(null,"Model 2", Category.Truck, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, brand2);
-        ModelsDTO clsclass = new ModelsDTO(null,"CLS", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
-        ModelsDTO sclass = new ModelsDTO(null,"S-CLASS CABRIO", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
-        ModelsDTO eclass = new ModelsDTO(null,"E-CLASS", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
-        ModelsDTO ieight = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
-        ModelsDTO ieight1 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2024, 2026, sqlDate,sqlDate, bmw);
+//        ModelsDTO model1 = new ModelsDTO(null,"Model 1", Category.Car, "/img/cls.jpg", 2023, 2024, sqlDate,sqlDate, brand1);
+//        ModelsDTO model2 = new ModelsDTO(null,"Model 2", Category.Truck, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, brand2);
+        ModelsDTO clsclass = new ModelsDTO(null,"CLS", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
+        ModelsDTO sclass = new ModelsDTO(null,"S-CLASS CABRIO", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
+        ModelsDTO eclass = new ModelsDTO(null,"E-CLASS", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, mercedesBenz);
+        ModelsDTO ieight = new ModelsDTO(null,"I-8", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
+       ModelsDTO ieight1 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2024, 2026, sqlDate,sqlDate, bmw);
         ModelsDTO ieight2 = new ModelsDTO(null,"I-8", Category.Car, "/img/cls.jpg", 2025, 2027, sqlDate,sqlDate, bmw);
-        ModelsDTO mfive = new ModelsDTO(null,"M-5 COMPETITION", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
-        ModelsDTO rssix = new ModelsDTO(null,"R-6 AVANT", Category.Car, "/img/cls.jpg", 2023, 2025, sqlDate,sqlDate, audi);
+        ModelsDTO mfive = new ModelsDTO(null,"M-5 COMPETITION", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, bmw);
+        ModelsDTO rssix = new ModelsDTO(null,"R-6 AVANT", Category.Car, "/static/pic/cls.jpg", 2023, 2025, sqlDate,sqlDate, audi);
 //        model1.setCategory(Category.Car);
 //        model2.setCategory(Category.Truck);
 //        model1 = modelsService.addModels(model1);
@@ -173,17 +182,17 @@ public class DataInitializer implements CommandLineRunner {
 
 
         offers1 = offersService.newOffers(offers1);
-//        offers2 = offersService.newOffers(offers2);
+        offers2 = offersService.newOffers(offers2);
         offers3 = offersService.newOffers(offers3);
-//        offers4 = offersService.newOffers(offers4);
+        offers4 = offersService.newOffers(offers4);
         offers5 = offersService.newOffers(offers5);
-//        offers6 = offersService.newOffers(offers6);
+        offers6 = offersService.newOffers(offers6);
         offers7 = offersService.newOffers(offers7);
-//        offers8 = offersService.newOffers(offers8);
+        offers8 = offersService.newOffers(offers8);
         offers9 = offersService.newOffers(offers9);
-//        offers10 = offersService.newOffers(offers10);
+        offers10 = offersService.newOffers(offers10);
         offers11 = offersService.newOffers(offers11);
-//        offers12 = offersService.newOffers(offers12);
+        offers12 = offersService.newOffers(offers12);
 
 
 

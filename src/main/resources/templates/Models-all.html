@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head" />
 <body class="d-flex flex-column h-100">
 
@@ -7,7 +7,7 @@
 
 <h1 class="text-center">Добро пожаловать в раздел Модели</h1>
 <p class="text-center"><smal>Тут представлекны все модели в нашем автосалоне</smal></p>
-<div class="text-center">
+<div class="text-center" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
 <a class="btn btn-primary" style="background-color: white; border-color: black; color: black" href="/Models/add" role="button">Добавить новую модель</a>
 </div>
 <hr>

@@ -1,11 +1,12 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.dtos.ModelsDTO;
 import com.example.springdatabasicdemo.dtos.OffersDTO;
 import com.example.springdatabasicdemo.dtos.UserDTO;
 import com.example.springdatabasicdemo.models.Offers;
 import com.example.springdatabasicdemo.models.Users;
+import com.example.springdatabasicdemo.repositories.ModelsRepository;
 import com.example.springdatabasicdemo.repositories.OffersRepository;
+import com.example.springdatabasicdemo.repositories.UserRepository;
 import com.example.springdatabasicdemo.services.OffersService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -15,6 +16,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -25,6 +29,12 @@ import java.util.stream.Collectors;
 public class OffersServiceImpl implements OffersService<UUID> {
     @Autowired
     private OffersRepository offersRepository;
+
+    @Autowired
+    private ModelsRepository modelsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -46,6 +56,17 @@ public class OffersServiceImpl implements OffersService<UUID> {
             return modelMapper.map(offersRepository.save(offers), OffersDTO.class);
         }
     }
+
+
+
+//    @Override
+//public void register(OffersDTO offer) {
+//        Offers of = modelMapper.map(offer, Offers.class);
+//        of.setCreated(Date.valueOf(LocalDate.now()));
+//        of.setModel(modelsRepository.findByName(offer.getModel()).orElse(null));
+//        of.setSeller(userRepository.findByUsername(offer.getUser()).orElse(null));
+//        offerRepository.saveAndFlush(of);
+//    }
 
     @Override
     public OffersDTO getOfferById(int id) {

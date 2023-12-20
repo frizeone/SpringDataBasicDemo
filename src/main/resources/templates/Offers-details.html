@@ -10,33 +10,44 @@
             <div class="col-md-2"></div>
             <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1 th:text="'Model details: ' + ${modelAtribute.name}"></h1>
+                    <h1 th:text="'Offer model details: ' + ${offersDetails.model.name}"></h1>
                 </div>
                 <div class="row bg-light rounded">
                     <div class="col-md-6">
-                        <h2>Model</h2>
+                        <h2>Offer</h2>
                         <hr>
-                        <h4 th:text="'Name: ' + ${modelAtribute.name}"></h4>
+                        <h4 th:text="'Название модели: ' + ${offersDetails?.model?.name}"></h4>
                         <hr>
-                        <h4 th:text="'Category: ' + ${modelAtribute.category}"></h4>
+                        <h4 th:text="'Владелец: ' + ${offersDetails?.users?.username}"></h4>
                         <hr>
-                        <h4 th:text="'Start Year: ' + ${modelAtribute.startYear}"></h4>
+                        <h4 th:text="'Бренд: ' + ${offersDetails?.model?.brands?.name}"></h4>
                         <hr>
-                        <h4 th:text="'End Year: ' + ${modelAtribute.endYear}"></h4>
+                        <h4 th:text="'Двигатель: ' + ${offersDetails?.engine}"></h4>
                         <hr>
-                        <h4 th:text="'Created: ' + ${modelAtribute.created}"></h4>
+                        <h4 th:text="'Трансмисия: ' + ${offersDetails?.transmission}"></h4>
                         <hr>
-                        <h4 th:text="'Brands: ' + ${modelAtribute.brands.name}"></h4>
+                        <h4 th:text="'Пробег: ' + ${offersDetails?.mileage}"></h4>
                         <hr>
-<!--                        <div class="align-bottom" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">-->
+                        <h4 th:text="'Дата создания: ' + ${offersDetails?.created}"></h4>
+                        <hr>
+                        <h4 th:text="'Дата модификации: ' + ${offersDetails?.modified}"></h4>
+                        <hr>
+                        <h4 th:text="'Год авто: ' + ${offersDetails?.year}"></h4>
+                        <hr>
+                        <h4 th:text="'Цена авто: ' + ${offersDetails?.price}"></h4>
+                        <hr>
+                        <p th:text="'Описание: ' + ${offersDetails?.description}"></p>
+                        <hr>
+
+                        <!--                        <div class="align-bottom" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">-->
                         <!--      <a class="btn btn-danger align-bottom"
                                  th:href="@{/employees/employee-delete{employee-full-name}(employee-full-name=${employeeDetails.firstName} + ' ' + ${employeeDetails.lastName})}">Delete
                                   employee</a>-->
-  <!--                        </div>-->
+                        <!--                        </div>-->
                     </div>
                     <div class="col-md-6">
 
-                        <img th:src="${modelAtribute.imageUrl}"height="350px">
+                        <img th:src="${offersDetails.imageUrl}"height="350px">
                         <br>
                         <div class="row" style="margin-top: 15px; margin-left: 50px">
                             <br>
@@ -66,7 +77,7 @@
                                                         border-radius: 10px;
                                                         color: black;
                                                         text-decoration: none;"
-                                       th:href="@{/Models/vive/Models-delete/{name}/{startYear}/{endYear}(name=${modelAtribute.name}, startYear=${modelAtribute.startYear}, endYear=${modelAtribute.endYear})}"
+                                       th:href="@{/Offers/details/delete/{abc}(abc=${offersDetails.id})}"
 
                                 >Удалить</a>
                                 </h4>
@@ -83,8 +94,8 @@
                                                         border-radius: 10px;
                                                         color: black;
                                                         text-decoration: none;"
-                                       href="/Models/all"
-                                >К моделям</a>
+                                       href="/Offers/all"
+                                >К офферам</a>
                                 </h4>
                             </div>
 
@@ -95,7 +106,7 @@
             </main>
         </div>
 
-        </div>
+    </div>
     </div>
 </main>
 <footer th:replace="fragments/footer"/>
